@@ -5,6 +5,13 @@ using System.Windows.Forms;
 
 namespace FractionCalc
 {
+	class Fraction
+	{
+		private int Numerator;
+		private int Denomenator;
+
+	}
+
 	static class Program
 	{
 		/// <summary>
