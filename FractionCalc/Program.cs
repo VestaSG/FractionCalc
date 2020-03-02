@@ -10,6 +10,10 @@ namespace FractionCalc
 		private int Numerator;
 		private int Denomenator;
 
+		void Fraction()
+		{
+			;
+		}
 	}
 
 	static class Program
