@@ -5,15 +5,17 @@ using System.Windows.Forms;
 
 namespace FractionCalc
 {
-	class Fraction
+	public class Fraction
 	{
 		private int Numerator;
 		private int Denomenator;
 
-		void Fraction()
+		public Fraction(int Numerator, int Denomenator)
 		{
-			;
+			this.Numerator = Numerator;
+			this.Denomenator = Denomenator;
 		}
+		// addition, subtraction, multiplication, division
 	}
 
 	static class Program
