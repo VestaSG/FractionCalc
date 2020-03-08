@@ -103,6 +103,7 @@
 			this.calcButton.TabIndex = 7;
 			this.calcButton.Text = "Calc";
 			this.calcButton.UseVisualStyleBackColor = true;
+			this.calcButton.Click += new System.EventHandler(this.calcButton_Click);
 			// 
 			// panel3
 			// 
@@ -149,12 +150,13 @@
 			this.replaseButton.TabIndex = 12;
 			this.replaseButton.Text = "<->";
 			this.replaseButton.UseVisualStyleBackColor = true;
+			this.replaseButton.Click += new System.EventHandler(this.replaseButton_Click);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(685, 110);
+			this.ClientSize = new System.Drawing.Size(685, 124);
 			this.Controls.Add(this.replaseButton);
 			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.panel3);
@@ -168,7 +170,8 @@
 			this.Controls.Add(this.textBox2);
 			this.Controls.Add(this.textBox1);
 			this.Name = "Form1";
-			this.Text = "Form1";
+			this.Text = "Frm1";
+			this.Activated += new System.EventHandler(this.Form1_Activated);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
