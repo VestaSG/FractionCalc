@@ -172,6 +172,7 @@
 			this.Name = "Form1";
 			this.Text = "Frm1";
 			this.Activated += new System.EventHandler(this.Form1_Activated);
+			this.Shown += new System.EventHandler(this.Form1_Shown);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

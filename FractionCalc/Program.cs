@@ -5,11 +5,22 @@ using System.Windows.Forms;
 
 namespace FractionCalc
 {
-	public class SimpleNums
+	// Класс, отвечающий за работу с простыми числами и вычисления на их основе
+	public class SimpleNums // singleton
 	{
+		private static SimpleNums instance;
 		private List<int> SimpleNumsArray = new List<int>();
 
-		public SimpleNums(int MaxValue)
+		public static SimpleNums getInstance(int MaxValue=100000)
+		{
+			if (instance == null)
+			{
+				instance = new SimpleNums(MaxValue);
+			}
+			return instance;
+		}
+
+		private SimpleNums(int MaxValue)
 		{
 			MaxValue = Math.Abs(MaxValue);
 			for (int i = 2; i <= MaxValue; ++i)
@@ -74,6 +85,7 @@ namespace FractionCalc
 			return PrintArray(SimpleNumsFor(num));
 		}
 
+		// Наибольший общий делитель
 		public int NOD(int first, int second)
 		{
 			first = Math.Abs(first);
@@ -105,6 +117,7 @@ namespace FractionCalc
 			return outNOD;
 		}
 
+		// Наименьшее общее кратное
 		public int NOK(int first, int second)
 		{
 			first = Math.Abs(first);
@@ -113,17 +126,60 @@ namespace FractionCalc
 		}
 	}
 
+	// Класс работы с дробями
 	public class Fraction
 	{
 		private int Numerator;
 		private int Denomenator;
 
+		public int getNumerator()
+		{
+			return Numerator;
+		}
+		public int getDenomenator()
+		{
+			return Denomenator;
+		}
+
+		// метод упрощения дроби
+		protected void simplify()
+		{
+			int FractionNOD = SimpleNums.getInstance().NOD(Numerator, Denomenator);
+			Numerator = Numerator / FractionNOD;
+			Denomenator = Denomenator / FractionNOD;
+		}
+
 		public Fraction(int Numerator, int Denomenator)
 		{
 			this.Numerator = Numerator;
 			this.Denomenator = Denomenator;
+			simplify();
 		}
+
 		// addition, subtraction, multiplication, division
+		// возвращают новый объект дроби
+		public Fraction addition(Fraction FractionObj)
+		{
+			int den = SimpleNums.getInstance().NOK(Denomenator, FractionObj.getDenomenator());
+			int num = Numerator * (den / Denomenator);
+			int num2 = FractionObj.getNumerator() * (den / FractionObj.getDenomenator());
+			return new Fraction((num + num2), den);
+		}
+		public Fraction subtraction(Fraction FractionObj)
+		{
+			int den = SimpleNums.getInstance().NOK(Denomenator, FractionObj.getDenomenator());
+			int num = Numerator * (den / Denomenator);
+			int num2 = FractionObj.getNumerator() * (den / FractionObj.getDenomenator());
+			return new Fraction((num - num2), den);
+		}
+		public Fraction multiplication(Fraction FractionObj)
+		{
+			return new Fraction(Numerator * FractionObj.getNumerator(), Denomenator * FractionObj.getDenomenator());
+		}
+		public Fraction division(Fraction FractionObj)
+		{
+			return new Fraction(Numerator * FractionObj.getDenomenator(), Denomenator * FractionObj.getNumerator());
+		}
 	}
 
 	static class Program
